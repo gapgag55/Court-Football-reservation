@@ -20,7 +20,7 @@ class CourtBooking(models.Model):
   phone_number = fields.Char(string="Phone Number")
   price = fields.Integer(string="Price", compute="_get_price")
   available_court = fields.Many2one(
-    string=u'Avilable Court',
+    string=u'Court Revserve',
     comodel_name='court.court',
     ondelete='set null',
   )
@@ -42,7 +42,7 @@ class CourtBooking(models.Model):
     books = self.search([])
     
     for book in books:
-      self.debug = str(book.date == self.date) + str(book.slot_time == self.slot_time) + str(book.available_court == self.available_court)
+      # self.debug = str(book.date == self.date) + str(book.slot_time == self.slot_time) + str(book.available_court == self.available_court)
       if book.date == self.date and book.slot_time == self.slot_time and book.available_court == self.available_court:
         return {
           'warning': {
@@ -163,3 +163,31 @@ class CourtBooking(models.Model):
         self.end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S") + timedelta(hours=-7, days=1)
       else:
         self.end_date = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S") + timedelta(hours=-7)
+
+  @api.one
+  def generate_record_name(self):
+    self.debug = "Action occurs!!"
+    # self.debug = str(cr) + " --- " + str(self.env.cr)
+    # self.debug = str(cr) + " -- " + str(uid)
+    # invoice_id = self.env['account.invoice'].create({
+    #   'name' : 'test',
+    #   'date_invoice' : self.date,
+    # }, {
+    #   'account_id': self.env.uid
+    # })
+
+    # self.env['account.invoice.line'].create({
+    #   'invoice_id' : invoice_id,
+    #   'name' : 'name',
+    #   'product_id' : '2',
+    # })
+
+    # for record in self.browse(cr, uid):
+
+    #   for line in record.line:
+    #     self.debug = line.name
+    #     self.pool.get('account.invoice.line').create(cr, uid, {
+    #       'invoice_id' : invoice_id,
+    #       'name' : line.name,
+    #       'product_id' : line.product_id.id,
+    #     })

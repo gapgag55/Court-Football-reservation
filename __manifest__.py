@@ -7,7 +7,7 @@
   'website': "https://www.github.com/gapgag55",
   'category': 'Sales',
   'version': '0.1',
-  'depends': ['base'],
+  'depends': ['base', 'account', 'board'],
   'data': [
     'views/court_book.xml',
     'views/buffet.xml',

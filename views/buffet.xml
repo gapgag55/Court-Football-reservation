@@ -1,40 +1,48 @@
 <odoo>
   <data>
-    <!-- <record model="ir.ui.view" id="court_book_form_view">
-      <field name="name">court.book.form</field>
-      <field name="model">court.book</field>
+    <record model="ir.ui.view" id="buffet_book_form_view">
+      <field name="name">buffet.book.form</field>
+      <field name="model">buffet.book</field>
       <field name="arch" type="xml">
         <form string="Court Book Form">
+          <header>
+            <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" />
+            <!-- <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/> -->
+            <!-- <button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/>
+            <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/> -->
+            <!--This will create the statusbar, thanks to the widget. -->
+            <field name="state" widget="statusbar"/>
+          </header>
           <sheet>
             <group>
-              <group>
-                <field name="date"/>
-              </group>
-              <group>
-                <field name="slot_time"/>
-              </group>
-            </group>
-            <group>
-              <field name="is_member" />
-              <field name="member_id" attrs="{'invisible':[('is_member', '!=', True)]}" />
-              <field name="phone_number" attrs="{'invisible':[('is_member', '!=', False)]}"/>
+              <field name="book_type"/>
+              <field name="member_id" attrs="{'invisible':[('book_type', '!=', 'member')]}" />
+              <field name="name" attrs="{'invisible':[('book_type', '==', 'member')]}"/>
+              <field name="phone_number" attrs="{'invisible':[('book_type', '==', 'member')]}"/>
+              <field name="date"/>
+              <field name="slot_time"/>
               <field name="price" readonly="1" />
+              <field name="debug" readonly="1" />
             </group>
           </sheet>
         </form>
       </field>
-    </record> -->
+    </record>
 
     <!-- override the automatically generated list view for courts -->
-    <!-- <record model="ir.ui.view" id="court_book_tree_view">
-      <field name="name">court.book.tree</field>
-      <field name="model">court.book</field>
+    <record model="ir.ui.view" id="buffet_book_tree_view">
+      <field name="name">buffet.book.tree</field>
+      <field name="model">buffet.book</field>
       <field name="arch" type="xml">
-        <tree string="Court Book Tree">
-          <field name="member_id"/>
+        <tree string="Buffet Book Tree">
+          <field name="date"/>
+          <field name="slot_time"/>
+          <field name="book_type"/>
+          <field name="name"/>
+          <field name="phone_number"/>
         </tree>
       </field>
-    </record> -->
+    </record>
 
     <!-- calendar view -->
     <!-- <record model="ir.ui.view" id="court_book_calendar_view">

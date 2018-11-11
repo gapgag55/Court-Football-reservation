@@ -48,7 +48,7 @@
     </record>
 
     <!-- top level menu: no parent -->
-    <menuitem id="court_menu" name="Court Setting" parent="main_court_menu"/>
+    <menuitem id="court_menu" name="Configuration" parent="main_court_menu"/>
     <menuitem id="court" name="Court" parent="court_menu" action="court_list_action"/>
 
 
@@ -94,6 +94,14 @@
                   <field name="weekend_night_pre"/>
                 </group>
               </page>
+              <page string="Buffet">
+                <group string="Monday - Tuesday">
+                  <field name="buffet_mon_tues"/>
+                </group>
+                <group string="Friday - Sunday">
+                  <field name="buffet_fri_sat_sun"/>
+                </group>
+              </page>
             </notebook>
           </sheet>
         </form>
@@ -104,7 +112,7 @@
       <field name="name">court.price.tree</field>
       <field name="model">court.price</field>
       <field name="arch" type="xml">
-        <tree string="Price Tree" create="false" edit="false">
+        <tree string="Price Tree" create="false" edit="false" delete="false">
           <field name="name"/>
         </tree>
       </field>

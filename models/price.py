@@ -29,3 +29,6 @@ class Price(models.Model):
   weekend_night_guest = fields.Integer(string="Guest")
   weekend_night_member = fields.Integer(string="Member")
   weekend_night_pre = fields.Integer(string="Pre(24)")
+
+  buffet_mon_tues = fields.Integer(string="Price")
+  buffet_fri_sat_sun = fields.Integer(string="Price")

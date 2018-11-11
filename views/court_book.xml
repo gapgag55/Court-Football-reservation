@@ -6,31 +6,25 @@
       <field name="arch" type="xml">
         <form string="Court Book Form">
         <header>
-          <button string="Set to concept" type="object" name="concept_progressbar"/>
-          <!--The oe_highlight class gives the button a red color when it is saved.
-          It is usually used to indicate the expected behaviour. -->
-          <button string="Set to started" type="object" name="started_progressbar" class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/>
-          <button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/>
-          <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/>
+          <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" />
+          <!-- <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/> -->
+          <!-- <button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/>
+          <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/> -->
           <!--This will create the statusbar, thanks to the widget. -->
           <field name="state" widget="statusbar"/>
-        </header>
+        </header> 
           <sheet>
             <group>
               <group>
                 <field name="date"/>
-              </group>
-              <group>
                 <field name="slot_time"/>
+                <field name="available_court" />
+                <field name="book_type" />
+                <field name="member_id" attrs="{'invisible':[('book_type', '!=', 'member')]}" />
+                <field name="phone_number" attrs="{'invisible':[('book_type', '==', 'member')]}"/>
+                <field name="price"/>
+                <field name="debug"/>
               </group>
-            </group>
-            <group>
-              <field name="available_court" />
-              <field name="book_type" />
-              <field name="member_id" attrs="{'invisible':[('book_type', '!=', 'member')]}" />
-              <field name="phone_number" attrs="{'invisible':[('book_type', '!=', 'guest')]}"/>
-              <field name="price" readonly="1" />
-              <field name="debug" readonly="1" />
             </group>
           </sheet>
         </form>
@@ -43,7 +37,12 @@
       <field name="model">court.book</field>
       <field name="arch" type="xml">
         <tree string="Court Book Tree">
+          <field name="date"/>
+          <field name="slot_time"/>
+          <field name="available_court"/>
+          <field name="book_type"/>
           <field name="member_id"/>
+          <field name="phone_number"/>
         </tree>
       </field>
     </record>
@@ -70,6 +69,6 @@
     <!-- top level menu: no parent -->
     <menuitem id="main_court_menu" name="Court Reservation"/>
     <menuitem id="court_book_menu" name="Court Reservation" parent="main_court_menu"/>
-    <menuitem id="member_menu" name="Court Booking" parent="court_book_menu" action="court_book_list_action"/>
+    <menuitem id="member_menu" name="Court Schedule" parent="court_book_menu" action="court_book_list_action"/>
   </data>
 </odoo>
