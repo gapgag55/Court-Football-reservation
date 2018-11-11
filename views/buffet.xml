@@ -1,0 +1,63 @@
+<odoo>
+  <data>
+    <!-- <record model="ir.ui.view" id="court_book_form_view">
+      <field name="name">court.book.form</field>
+      <field name="model">court.book</field>
+      <field name="arch" type="xml">
+        <form string="Court Book Form">
+          <sheet>
+            <group>
+              <group>
+                <field name="date"/>
+              </group>
+              <group>
+                <field name="slot_time"/>
+              </group>
+            </group>
+            <group>
+              <field name="is_member" />
+              <field name="member_id" attrs="{'invisible':[('is_member', '!=', True)]}" />
+              <field name="phone_number" attrs="{'invisible':[('is_member', '!=', False)]}"/>
+              <field name="price" readonly="1" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record> -->
+
+    <!-- override the automatically generated list view for courts -->
+    <!-- <record model="ir.ui.view" id="court_book_tree_view">
+      <field name="name">court.book.tree</field>
+      <field name="model">court.book</field>
+      <field name="arch" type="xml">
+        <tree string="Court Book Tree">
+          <field name="member_id"/>
+        </tree>
+      </field>
+    </record> -->
+
+    <!-- calendar view -->
+    <!-- <record model="ir.ui.view" id="court_book_calendar_view">
+      <field name="name">court.book.calendar</field>
+      <field name="model">court.book</field>
+      <field name="arch" type="xml">
+        <calendar string="Court Calendar" date_start="start_date" date_stop="end_date">
+          <field name="member_id"/>
+        </calendar>
+      </field>
+    </record> -->
+
+    <!-- window action -->
+    <record model="ir.actions.act_window" id="buffet_book_list_action">
+      <field name="name">Buffet Booking</field>
+      <field name="res_model">buffet.book</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- top level menu: no parent -->
+    <menuitem id="main_court_menu" name="Court Reservation"/>
+    <menuitem id="buffet_book_menu" name="Buffet" parent="main_court_menu"/>
+    <menuitem id="buffet_menu" name="Buffet Booking" parent="buffet_book_menu" action="buffet_book_list_action"/>
+  </data>
+</odoo>

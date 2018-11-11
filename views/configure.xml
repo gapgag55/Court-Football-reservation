@@ -1,0 +1,128 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="court_form_view">
+      <field name="name">court.court.form</field>
+      <field name="model">court.court</field>
+      <field name="arch" type="xml">
+        <form string="Court Form">
+          <sheet>
+            <group>
+              <field name="court_name" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="court_search_view">
+      <field name="name">court.court.search</field>
+      <field name="model">court.court</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="court_name"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- override the automatically generated list view for courses -->
+    <record model="ir.ui.view" id="court_tree_view">
+      <field name="name">court.court.tree</field>
+      <field name="model">court.court</field>
+      <field name="arch" type="xml">
+        <tree string="Court Tree">
+          <field name="court_name"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- window action -->
+    <record model="ir.actions.act_window" id="court_list_action">
+      <field name="name">Court</field>
+      <field name="res_model">court.court</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Create the first course
+        </p>
+      </field>
+    </record>
+
+    <!-- top level menu: no parent -->
+    <menuitem id="court_menu" name="Court Setting" parent="main_court_menu"/>
+    <menuitem id="court" name="Court" parent="court_menu" action="court_list_action"/>
+
+
+    <record model="ir.ui.view" id="price_form_view">
+      <field name="name">court.price.form</field>  
+      <field name="model">court.price</field>
+      <field name="arch" type="xml">
+        <form string="Price Form" create="false">
+          <sheet>
+            <field name="name"/>
+            <notebook>
+              <page string="Weekday">
+                <group string="06:00 - 17:00">
+                  <field name="weekday_morning_guest"/>
+                  <field name="weekday_morning_member"/>
+                  <field name="weekday_morning_pre"/>
+                </group>
+                <group string="17:00 - 23:00">
+                  <field name="weekday_evening_guest"/>
+                  <field name="weekday_evening_member"/>
+                  <field name="weekday_evening_pre"/>
+                </group>
+                <group string="23:00 - 02:00">
+                  <field name="weekday_night_guest"/>
+                  <field name="weekday_night_member"/>
+                  <field name="weekday_night_pre"/>
+                </group>
+              </page>
+              <page string="Weekend">
+                <group string="06:00 - 17:00">
+                  <field name="weekend_morning_guest"/>
+                  <field name="weekend_morning_member"/>
+                  <field name="weekend_morning_pre"/>
+                </group>
+                <group string="17:00 - 23:00">
+                  <field name="weekend_evening_guest"/>
+                  <field name="weekend_evening_member"/>
+                  <field name="weekend_evening_pre"/>
+                </group>
+                <group string="23:00 - 02:00">
+                  <field name="weekend_night_guest"/>
+                  <field name="weekend_night_member"/>
+                  <field name="weekend_night_pre"/>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="price_tree_view">
+      <field name="name">court.price.tree</field>
+      <field name="model">court.price</field>
+      <field name="arch" type="xml">
+        <tree string="Price Tree" create="false" edit="false">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="court.price" id="setting">
+      <field name="name">Setting</field>
+    </record>
+
+    <!-- window action -->
+    <record model="ir.actions.act_window" id="price_rate_list_action">
+      <field name="name">Price Rate</field>
+      <field name="res_model">court.price</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="price_rate" name="Price Rate" parent="court_menu" action="price_rate_list_action"/>
+  </data>
+</odoo>
