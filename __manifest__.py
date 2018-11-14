@@ -7,11 +7,12 @@
   'website': "https://www.github.com/gapgag55",
   'category': 'Sales',
   'version': '0.1',
-  'depends': ['base', 'account', 'board'],
+  'depends': ['base', 'account', 'membership'],
   'data': [
     'views/court_book.xml',
     'views/buffet.xml',
     'views/configure.xml',
+    'views/member.xml',
   ],
   'demo': [
     'demo.xml',

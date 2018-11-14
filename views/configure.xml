@@ -48,7 +48,7 @@
     </record>
 
     <!-- top level menu: no parent -->
-    <menuitem id="court_menu" name="Configuration" parent="main_court_menu"/>
+    <menuitem id="court_menu" name="Configuration" parent="main_court_menu" sequence="3"/>
     <menuitem id="court" name="Court" parent="court_menu" action="court_list_action"/>
 
 

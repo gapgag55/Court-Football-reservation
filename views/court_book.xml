@@ -5,29 +5,38 @@
       <field name="model">court.book</field>
       <field name="arch" type="xml">
         <form string="Court Book Form">
-        <header>
-          <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" />
-          <!-- <button string="Create Invoice" type="object" name="generate_record_name" class="oe_highlight" attrs="{'invisible': [('state','!=','concept')]}"/> -->
-          <!-- <button string="In progress" type="object" name="progress_progressbar" attrs="{'invisible': [('state','=','progress')]}"/>
-          <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/> -->
-          <!--This will create the statusbar, thanks to the widget. -->
-          <field name="state" widget="statusbar"/>
-        </header> 
+          <header>
+            <button string="Payment" type="object" name="make_invoice" class="oe_highlight" attrs="{'invisible': [('state','!=','payment')]}" />
+            <button string="Done" type="object" name="done_progressbar" attrs="{'invisible': [('state','=','finished')]}"/> -->
+            <field name="state" widget="statusbar"/>
+          </header>
           <sheet>
             <group>
               <group>
                 <field name="date"/>
                 <field name="slot_time"/>
-                <field name="available_court" />
+                <field name="court_name" />
                 <field name="book_type" />
                 <field name="member_id" attrs="{'invisible':[('book_type', '!=', 'member')]}" />
+                <field name="name" attrs="{'invisible':[('book_type', '==', 'member')]}"/>
                 <field name="phone_number" attrs="{'invisible':[('book_type', '==', 'member')]}"/>
                 <field name="price"/>
-                <field name="debug"/>
+                <!-- <field name="debug"/> -->
               </group>
             </group>
           </sheet>
         </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="court_search_view">
+      <field name="name">court.book.search</field>
+      <field name="model">court.book</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="date"/>
+        </search>
       </field>
     </record>
 
@@ -36,13 +45,14 @@
       <field name="name">court.book.tree</field>
       <field name="model">court.book</field>
       <field name="arch" type="xml">
-        <tree string="Court Book Tree">
+        <tree string="Court Book Tree"> 
           <field name="date"/>
           <field name="slot_time"/>
-          <field name="available_court"/>
+          <field name="court_name"/>
           <field name="book_type"/>
-          <field name="member_id"/>
+          <field name="name"/>
           <field name="phone_number"/>
+          <field name="state"/>
         </tree>
       </field>
     </record>
@@ -52,8 +62,10 @@
       <field name="name">court.book.calendar</field>
       <field name="model">court.book</field>
       <field name="arch" type="xml">
-        <calendar string="Court Calendar" date_start="start_date" date_stop="end_date">
-          <field name="member_id"/>
+        <calendar string="Court Calendar" date_start="start_date" date_stop="end_date" color="state">
+          <field name="name"/>
+          <field name="court_name"/>
+          <field name="phone_number"/>
         </calendar>
       </field>
     </record>
@@ -68,7 +80,7 @@
 
     <!-- top level menu: no parent -->
     <menuitem id="main_court_menu" name="Court Reservation"/>
-    <menuitem id="court_book_menu" name="Court Reservation" parent="main_court_menu"/>
+    <menuitem id="court_book_menu" name="Court Reservation" parent="main_court_menu" sequence="1"/>
     <menuitem id="member_menu" name="Court Schedule" parent="court_book_menu" action="court_book_list_action"/>
   </data>
 </odoo>

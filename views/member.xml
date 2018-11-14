@@ -1,0 +1,18 @@
+<odoo>
+  <record model="ir.ui.view" id="membership_form_view">
+    <field name="name">partner.instructor</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <notebook position="inside">
+        <page string="Reserve Times">
+          <group>
+            <field name="reserve_court" />
+            <field name="reserve_buffet" />
+            <field name="reserve_free" />
+          </group>
+        </page>
+      </notebook>
+    </field>
+  </record>
+</odoo>
